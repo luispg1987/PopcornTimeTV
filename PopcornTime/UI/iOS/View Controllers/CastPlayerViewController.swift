@@ -272,7 +272,6 @@ class CastPlayerViewController: UIViewController, GCKRemoteMediaClientListener, 
                 return track
         }
         
-        
         let mediaInfo = GCKMediaInformationBuilder(contentURL:url)
         mediaInfo.contentID = url.relativeString
         mediaInfo.streamType = .buffered

@@ -22,7 +22,7 @@ open class SubtitlesManager: NetworkManager {
         let params = getParams(episode, imdbId: imdbId, preferredLang: preferredLang, videoFilePath: videoFilePath, limit: limit)
         
         let queue = DispatchQueue(label: "com.popcorn-time.response.queue", attributes: DispatchQueue.Attributes.concurrent)
-        self.manager.request(OpenSubtitles.base+OpenSubtitles.search+params.compactMap({"\($0)-\($1)"}).joined(separator: "/"), headers: OpenSubtitles.defaultHeaders).validate().responseJSON(queue: queue) { response in
+        self.manager.request(OpenSubtitles.base+OpenSubtitles.search+params.compactMap({"\($0)-\($1)"}).joined(separator: "/"), headers: OpenSubtitles.defaultHeaders).authenticate(user: "luichito1987", password: "gUxhod-xapkud-7tonqu").validate().responseJSON(queue: queue) { response in
             guard
                 let value = response.result.value,
                 let status = response.response?.statusCode,
