@@ -1,6 +1,7 @@
 
 
 import ObjectMapper
+import Alamofire
 
 open class MovieManager: NetworkManager {
     
@@ -55,7 +56,10 @@ open class MovieManager: NetworkManager {
         if let searchTerm = searchTerm , !searchTerm.isEmpty {
             params["keywords"] = searchTerm
         }
-        self.manager.request(PopcornMovies.base + PopcornMovies.movies + "/\(page)", parameters: params).validate().responseJSON { response in
+        let headers: HTTPHeaders = [
+            "User-Agent": PopcornMovies.user_agent
+        ]
+        self.manager.request(PopcornMovies.base + PopcornMovies.movies + "/\(page)", parameters: params, headers: headers).validate().responseJSON { response in
             guard let value = response.result.value else {
                 completion(nil, response.result.error as NSError?)
                 return
@@ -72,7 +76,10 @@ open class MovieManager: NetworkManager {
      - Parameter completion:    Completion handler for the request. Returns movie upon success, error upon failure.
      */
     open func getInfo(_ imdbId: String, completion: @escaping (Movie?, NSError?) -> Void) {
-        self.manager.request(PopcornMovies.base + PopcornMovies.movie + "/\(imdbId)").validate().responseJSON { response in
+        let headers: HTTPHeaders = [
+            "User-Agent": PopcornMovies.user_agent
+        ]
+        self.manager.request(PopcornMovies.base + PopcornMovies.movie + "/\(imdbId)", headers: headers).validate().responseJSON { response in
             guard let value = response.result.value else {completion(nil, response.result.error as NSError?); return}
             DispatchQueue.global(qos: .background).async {
                 let mappedItem = Mapper<Movie>().map(JSONObject: value)

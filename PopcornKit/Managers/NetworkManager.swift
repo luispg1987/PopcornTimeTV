@@ -64,15 +64,23 @@ public struct Trakt {
 }
 
 public struct PopcornShows {
-    static let base = "https://tv-v2.api-fetch.sh"
+    //static let base = "https://movies-v2.api-fetch.sh"
+    //old static let base = "http://popcorn-ru.tk"
+    static let base = "https://popcorn-ru.tk"
     static let shows = "/shows"
     static let show = "/show"
+    //static let base = "http://api.pctapi.com"
+    
+    static let user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36"
 }
 
 public struct PopcornMovies {
-    static let base = "https://movies-v2.api-fetch.sh"
+    //static let base = "https://movies-v2.api-fetch.sh"
+    static let base = "https://popcorn-time.ga"
     static let movies = "/movies"
     static let movie = "/movie"
+    
+    static let user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36"
 }
 
 public struct TMDB {

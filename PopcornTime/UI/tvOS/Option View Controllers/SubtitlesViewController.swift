@@ -3,7 +3,7 @@
 import UIKit
 import struct PopcornKit.Subtitle
 
-protocol SubtitlesViewControllerDelegate: class {
+protocol SubtitlesViewControllerDelegate: AnyObject {
     func didSelectSubtitle(_ subtitle: Subtitle?)
 }
 
@@ -140,7 +140,7 @@ class SubtitlesViewController: OptionsStackViewController,SubtitlesViewControlle
     func didSelectSubtitle(_ subtitle: Subtitle?) {
         self.currentSubtitle = subtitle
 
-        for i in 0..<SubtitleSettings.shared.subtitlesSelectedForVideo.count{
+        for i in 0..<SubtitleSettings.shared.subtitlesSelectedForVideo.count {
             if let savedSubtitle = SubtitleSettings.shared.subtitlesSelectedForVideo[i] as? Subtitle{
                 if savedSubtitle.language == subtitle?.language{// do we have a sub with the same language in permanent storage
                     SubtitleSettings.shared.subtitlesSelectedForVideo.replaceSubrange(i...i, with: [subtitle as Any])//replace the one we have with the latest one
