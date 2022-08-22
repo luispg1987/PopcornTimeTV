@@ -92,6 +92,7 @@ class SubtitleSettings: NSObject, NSCoding {
         self.language = settings.language
         self.font = settings.font
         self.style = settings.style
+        subtitlesSelectedForVideo.removeAll()
     }
     
     func save() {

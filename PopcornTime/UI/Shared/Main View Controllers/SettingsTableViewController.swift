@@ -315,11 +315,17 @@ class SettingsTableViewController: UITableViewController, TraktManagerDelegate {
                         try FileManager.default.removeItem(atPath: NSTemporaryDirectory() + "/\(path)")
                     }
                     controller.title = "Success".localized
+                    
+                    //Cleaning subtitles
+                    SubtitleSettings.shared.save()
+                    
                     if size == 0 {
-                        controller.message = "Cache was already empty, no disk space was reclaimed.".localized
+                        controller.message = "Cache was already empty, no disk space was reclaimed.".localized + " Subtitulos limpiados tambien"
                     } else {
-                        controller.message = "Cleaned".localized + " \(ByteCountFormatter.string(fromByteCount: size, countStyle: .file))."
+                        controller.message = "Cleaned".localized + " \(ByteCountFormatter.string(fromByteCount: size, countStyle: .file))." + " Subtitulos limpiados tambien"
                     }
+                    
+                    
                 } catch {
                     controller.title = "Failed".localized
                     controller.message = "Error cleaning cache.".localized
